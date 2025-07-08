@@ -21,4 +21,3 @@ tzdata==2024.1
 virtualenv==20.28.0
 virtualenvwrapper-win==1.2.7
 whitenoise==6.9.0
-web: gunicorn oyo_clone.wsgi
