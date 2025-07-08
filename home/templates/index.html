@@ -1,0 +1,57 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+<div class="container mt-5 pt-5 pb-5">
+
+  <!-- Search & Sort Form -->
+  <div class="col-6 mx-auto mb-4">
+    <form class="d-flex gap-2" method="get">
+      <input type="text" name="search" class="form-control" placeholder="Search">
+      <select class="form-control" name="sort_by">
+        <option value="">Choose</option>
+        <option value="sort_low">Sort by Low to High</option>
+        <option value="sort_high">Sort by High to Low</option>
+      </select>
+      <button type="submit" class="btn btn-warning">Search</button>
+    </form>
+  </div>
+
+  <!-- Hotel Cards -->
+  <div class="row">
+    {% for hotel in hotels %}
+    <div class="col-md-3 mt-3">
+      <div class="card shadow" style="width: 100%;">
+        <a href="{% url 'hotel_details' hotel.hotel_slug %}" style="text-decoration: none; color: inherit;">
+          <!-- Hotel Image -->
+          {% if hotel.hotel_images.first %}
+            <img src="{{ hotel.hotel_images.first.image.url }}" class="card-img-top" alt="{{ hotel.hotel_name }}">
+          {% else %}
+            <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" class="card-img-top" alt="...">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{ hotel.hotel_name }}</h5>
+            <p><strong>Phone:</strong> {{ hotel.hotel_owner.phone_number }}</p>
+            <p><strong>Location:</strong> {{ hotel.hotel_location }}</p>
+
+            <!-- Amenities -->
+            <p class="mb-1"><strong>Amenities:</strong></p>
+            {% for amenity in hotel.ameneties.all %}
+              <span class="badge text-bg-primary">{{ amenity.name }}</span>
+            {% empty %}
+              <span class="text-muted">No amenities listed.</span>
+            {% endfor %}
+
+            <hr>
+            <p>
+              <strong>Price:</strong> <span class="badge bg-danger">₹{{ hotel.hotel_price }}</span><br>
+              <strong>Offer Price:</strong> <span class="badge bg-success">₹{{ hotel.hotel_offer_price }}</span>
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

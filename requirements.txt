@@ -1,0 +1,24 @@
+asgiref==3.8.1
+distlib==0.3.9
+Django==5.1.1
+django-debug-toolbar==5.2.0
+django-otp==1.6.0
+django-redis==6.0.0
+djangorestframework==3.15.2
+Faker==37.4.0
+filelock==3.16.1
+gunicorn==23.0.0
+numpy==2.1.3
+packaging==25.0
+pillow==11.0.0
+platformdirs==4.3.6
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
+python-dotenv==1.1.0
+redis==6.2.0
+sqlparse==0.5.1
+tzdata==2024.1
+virtualenv==20.28.0
+virtualenvwrapper-win==1.2.7
+whitenoise==6.9.0
+web: gunicorn oyo_clone.wsgi
