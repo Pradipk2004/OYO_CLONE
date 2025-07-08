@@ -1,1 +1,1 @@
-web: gunicorn oyo_clone.wsgi
+web: gunicorn OYO_CLONE.wsgi
