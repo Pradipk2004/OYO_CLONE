@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,29 +82,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'oyo_clone.wsgi.application'
 
+DATABASES = {
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
+}
 
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from dotenv import load_dotenv
-import os
-env = load_dotenv()
-name = os.getenv("NAME")
-user = os.getenv("USER")
-password = os.getenv("PASSWORD")
+#from dotenv import load_dotenv
+#import os
+#env = load_dotenv()
+#name = os.getenv("NAME")
+#user = os.getenv("USER")
+#password = os.getenv("PASSWORD")
 
-print(name, user, password)
+#print(name, user, password)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.getenv('NAME'),
+#        'USER': os.getenv('USER'),
+#        'PASSWORD': os.getenv('PASSWORD'),
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
 
 #CACHES = {
 #    "default": {
